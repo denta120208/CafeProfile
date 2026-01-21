@@ -30,12 +30,6 @@ const Header: React.FC = () => {
         }
     }, [router.pathname, checkAuth, isAuthenticated, logout, router]);
 
-    const handleLogout = () => {
-        logout();
-        router.push("/");
-        toast.success("Logout sukses");
-    };
-
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!mobileMenuOpen);
     };

@@ -2,7 +2,7 @@ import axiosInstance from "@/lib/axios";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 import DatePicker from "react-datepicker";
 import { Controller, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -73,7 +73,7 @@ const NewBookingForm = ({
     const watchGuestCount = watch("guestCount");
 
     // Fetch available tables based on date, time, and guest count
-    const fetchAvailableTables = async () => {
+    const fetchAvailableTables = useCallback(async () => {
         if (!selectedDate || !selectedTime || !watchGuestCount) return;
 
         const formattedDate = format(selectedDate, "yyyy-MM-dd");
@@ -99,7 +99,7 @@ const NewBookingForm = ({
             console.error("Error fetching available tables:", error);
             toast.error("Gagal mendapatkan data meja yang tersedia");
         }
-    };
+    }, [selectedDate, selectedTime, watchGuestCount, setAvailableTables, setValue]);
 
     useEffect(() => {
         if (selectedDate && selectedTime && watchGuestCount) {
