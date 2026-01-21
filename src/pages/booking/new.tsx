@@ -30,7 +30,7 @@ const NewBookingPage: NextPage = () => {
                 "Anda harus login terlebih dahulu untuk melakukan reservasi"
             );
         }
-    }, [isAuthenticated]);
+    }, [isAuthenticated, isHydrated, router]);
 
     return (
         <Layout>

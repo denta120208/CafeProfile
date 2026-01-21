@@ -260,6 +260,7 @@ const AdminMenusPage: NextPage = () => {
                                                 <div className="flex items-center">
                                                     {menu.image && (
                                                         <div className="flex-shrink-0 h-10 w-10 mr-4">
+                                                            {/* eslint-disable-next-line @next/next/no-img-element */}
                                                             <img
                                                                 className="h-10 w-10 rounded-full object-cover"
                                                                 src={`/images/menu/${menu.image}`}

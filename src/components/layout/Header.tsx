@@ -2,12 +2,12 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useAuthStore } from "../../store/authStore";
-import { User, LogOut, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { playfair } from "@/pages/_app";
 import toast from "react-hot-toast";
 
 const Header: React.FC = () => {
-    const { isAuthenticated, user, logout, checkAuth } = useAuthStore();
+    const { isAuthenticated, logout, checkAuth } = useAuthStore();
     const router = useRouter();
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -28,7 +28,7 @@ const Header: React.FC = () => {
                 router.push("/auth/login");
             }
         }
-    }, [router.pathname]);
+    }, [router.pathname, checkAuth, isAuthenticated, logout, router]);
 
     const handleLogout = () => {
         logout();

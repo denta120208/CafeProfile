@@ -105,7 +105,7 @@ const NewBookingForm = ({
         if (selectedDate && selectedTime && watchGuestCount) {
             fetchAvailableTables();
         }
-    }, [selectedDate, selectedTime, watchGuestCount]);
+    }, [selectedDate, selectedTime, watchGuestCount, fetchAvailableTables]);
 
     // Handle form submission
     const createBookingMutation = useMutation({
