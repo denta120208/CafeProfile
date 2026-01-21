@@ -1,9 +1,4 @@
 {
     "buildCommand": "prisma generate && next build",
-    "framework": "nextjs",
-    "env": {
-        "DATABASE_URL": "@database_url",
-        "JWT_SECRET": "@jwt_secret",
-        "RESEND_API_KEY": "@resend_api_key"
-    }
+    "framework": "nextjs"
 }
