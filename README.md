@@ -1,20 +1,26 @@
 # Foodpedia
 
-Sebuah aplikasi web fullstack untuk restoran "Foodpedia" dengan sistem reservasi via WhatsApp. Proyek ini dibuat sebagai showcase pribadi menggunakan NextJS dengan Pages Router dan berbagai tech stack modern.
+Sebuah aplikasi web fullstack untuk restoran "Foodpedia" dengan sistem reservasi meja yang lengkap. Proyek ini dibuat sebagai showcase pribadi menggunakan Next.js dengan Pages Router dan berbagai tech stack modern.
+
+[![Deploy to Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/denta120208/CafeProfile)
 
 ## 📋 Daftar Isi
 
-- [Demo](#demo)
-- [Fitur](#fitur)
-- [Tech Stack](#tech-stack)
-- [Instalasi](#instalasi)
-- [Penggunaan](#penggunaan)
-- [Struktur Proyek](#struktur-proyek)
-- [API Endpoints](#api-endpoints)
+- [Demo](#-demo)
+- [Fitur](#-fitur)
+- [Tech Stack](#-tech-stack)
+- [Instalasi](#-instalasi)
+- [Penggunaan](#-penggunaan)
+- [Deployment](#-deployment)
+- [Struktur Proyek](#-struktur-proyek)
+- [API Endpoints](#-api-endpoints)
+- [Kredensial Demo](#-kredensial-demo)
 
 ## 🚀 Demo
 
-(https://foodpedia.vercel.app)
+**Live Demo:** [https://cafeprofile.vercel.app](https://cafeprofile.vercel.app) *(akan tersedia setelah deployment)*
+
+**GitHub Repository:** [https://github.com/denta120208/CafeProfile](https://github.com/denta120208/CafeProfile)
 
 ## ✨ Fitur
 
@@ -59,46 +65,72 @@ Sebuah aplikasi web fullstack untuk restoran "Foodpedia" dengan sistem reservasi
 
 - Node.js (versi 18.x atau lebih tinggi)
 - NPM atau Yarn
-- PostgreSQL
+- PostgreSQL atau akun [Neon.tech](https://neon.tech) (gratis)
 
 ### Langkah-langkah
 
-1. Clone repositori:
+1. **Clone repositori:**
 
    ```bash
-   git clone https://github.com/username/foodpedia.git
-   cd foodpedia
+   git clone https://github.com/denta120208/CafeProfile.git
+   cd CafeProfile
    ```
 
-2. Install dependensi:
+2. **Install dependensi:**
 
    ```bash
    npm install
-   # atau
-   yarn install
    ```
 
-3. Buat file .env dan konfigurasikan variabel lingkungan:
+3. **Setup Database:**
 
+   **Opsi A - Cloud Database (Neon.tech)** ⭐ Recommended
+   
+   - Sign up di [Neon.tech](https://neon.tech) (gratis)
+   - Buat project baru
+   - Copy connection string yang diberikan
+
+   **Opsi B - Docker (Local)**
+   
+   ```bash
+   docker-compose up -d
    ```
-   DATABASE_URL="postgresql://username:password@localhost:5432/foodpediadb"
-   JWT_SECRET="your-secret-key"
+
+4. **Konfigurasi Environment Variables:**
+
+   Buat file `.env` di root folder:
+
+   ```env
+   # Database (gunakan connection string dari Neon.tech atau localhost)
+   DATABASE_URL="postgresql://username:password@host/database?sslmode=require"
+   
+   # JWT Secret (ganti dengan random string yang aman)
+   JWT_SECRET="your-super-secret-jwt-key-change-this"
+   
+   # Email (Optional - untuk fitur notifikasi)
    RESEND_API_KEY="your-resend-api-key"
-   EMAIL_FROM="noreply@foodpedia.com"
-   EMAIL_DEV="youremail@example.com"
-   NODE_ENV="development"
+   
+   # Next.js
+   NEXT_PUBLIC_API_URL="http://localhost:3000"
    ```
 
-4. Jalankan migrasi database:
+5. **Jalankan migrasi database:**
 
    ```bash
-   npx prisma migrate dev
+   npx prisma generate
+   npx prisma migrate deploy
    ```
 
-5. Isi database dengan data dummy:
+6. **Seed database dengan data dummy:**
    ```bash
    npm run seed
    ```
+
+   Data yang akan di-generate:
+   - 42 menu items dengan gambar
+   - 7 kategori menu
+   - 3 users (admin, staff, customer)
+   - 12 meja restoran
 
 ## 🚀 Penggunaan
 
@@ -106,8 +138,6 @@ Sebuah aplikasi web fullstack untuk restoran "Foodpedia" dengan sistem reservasi
 
 ```bash
 npm run dev
-# atau
-yarn dev
 ```
 
 Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat aplikasi.
@@ -117,10 +147,43 @@ Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat apl
 ```bash
 npm run build
 npm start
-# atau
-yarn build
-yarn start
 ```
+
+## 🌐 Deployment
+
+### Deploy ke Vercel (Recommended)
+
+Aplikasi ini sudah dikonfigurasi untuk deployment ke Vercel. Ikuti panduan lengkap di [DEPLOYMENT.md](DEPLOYMENT.md)
+
+**Quick Steps:**
+
+1. Push code ke GitHub ✅ *(sudah selesai)*
+2. Login ke [Vercel](https://vercel.com)
+3. Import repository: `denta120208/CafeProfile`
+4. Tambahkan Environment Variables:
+   - `DATABASE_URL`
+   - `JWT_SECRET`
+   - `RESEND_API_KEY` (optional)
+5. Deploy! 🚀
+
+Vercel akan otomatis:
+- Generate Prisma Client
+- Run database migrations
+- Build aplikasi
+- Deploy ke production
+
+**Auto Deployment:** Setiap push ke branch `main` akan otomatis trigger deployment baru.
+
+### Kenapa Tidak Bisa Deploy ke GitHub Pages?
+
+❌ GitHub Pages hanya support **static site** (HTML/CSS/JS)  
+✅ Aplikasi ini membutuhkan **server-side rendering & API routes**
+
+**Alternatif deployment:**
+- Vercel (Recommended - dibuat oleh tim Next.js)
+- Netlify
+- Railway
+- Render
 
 ## 📁 Struktur Proyek
 
@@ -214,4 +277,35 @@ foodpedia/
 
 - `POST /api/contact` - Kirim pesan kontak
 
-Dibuat dengan ❤️ oleh ahmadahsin.dev, Claude, dan ChatGPT.
+## 🔐 Kredensial Demo
+
+Setelah menjalankan `npm run seed`, gunakan kredensial berikut untuk login:
+
+**Admin:**
+- Email: `admin@citanusa.com`
+- Password: `admin123`
+
+**Staff:**
+- Email: `staff@citanusa.com`
+- Password: `staff123`
+
+**Customer:**
+- Email: `customer@example.com`
+- Password: `customer123`
+
+## 📝 Lisensi
+
+Proyek ini dibuat untuk keperluan pembelajaran dan portfolio.
+
+## 🤝 Kontribusi
+
+Kontribusi, issues, dan feature requests sangat diterima!
+
+## 📧 Kontak
+
+- GitHub: [@denta120208](https://github.com/denta120208)
+- Repository: [CafeProfile](https://github.com/denta120208/CafeProfile)
+
+---
+
+Dibuat dengan ❤️ menggunakan Next.js, Prisma, dan PostgreSQL
